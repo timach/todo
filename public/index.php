@@ -2,7 +2,7 @@
 
 require_once '../vendor/autoload.php';
 
-use app\core\Router;
+use App\Core\Router;
 
 session_start();
 
