@@ -9,12 +9,12 @@ class Router
 
     public function __construct()
     {
-        $this->controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'tasks';
-        $this->actionName = isset($_GET['action']) ? $_GET['action'] : 'list';
+        $this->controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'Tasks';
+        $this->actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
     }
     public function run()
     {
-        $controllerPath = 'app\controllers\\'.$this->controllerName.'Controller';
+        $controllerPath = 'App\Controllers\\'.$this->controllerName.'Controller';
         $action = $this->actionName.'Action';
 
         $controller = new $controllerPath;
