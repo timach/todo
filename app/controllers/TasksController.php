@@ -11,8 +11,10 @@ class TasksController
     public function editAction(){
         
     }
-    
+
     public function indexAction(){
-        echo 'task controler - index action';
+        $body = 'task controler - index action';
+        $title = 'index';
+        require_once(dirname(__FILE__).'/../views/templates/default.php');
     }
 }
