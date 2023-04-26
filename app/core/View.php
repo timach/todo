@@ -4,7 +4,6 @@ namespace App\Core;
 
 class View
 {
-	public $action;
     public $path;
 
 	public function __construct($name, $action='index')
