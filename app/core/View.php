@@ -18,9 +18,9 @@ class View
 		die();
 	}
 
-	public function render($title, $vars = [])
+	public function render($title, $data = [])
     {
-		extract($vars);
+		extract($data);
 		$path = '../app/views/'.strtolower($this->path).'.php';
         
 		if (file_exists($path))
@@ -30,9 +30,5 @@ class View
 			$body = ob_get_clean();
 			require '../app/views/templates/default.php';
 		}
-        else
-        {
-            var_dump($path);
-        }
 	}
 }	

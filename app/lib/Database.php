@@ -1,16 +1,25 @@
 <?php 
 
-namespace Application\lib;
+namespace App\lib;
 
-use PDO;
+use Mysqli;
 
 class Database{
     protected $mysqli;
 	
 	public function __construct()
 	{
-		$config = require 'application/config/mysql.php';
+		$config = require '../app/config/mysql.php';
         $this->mysqli = new mysqli($config["host"], $config["user"], $config["password"], $config["dbname"]);
+
+		if ($this->mysqli->connect_errno)
+		{
+			echo "Failed to connect to MySQL: " . $this->mysqli->connect_error;
+			die();
+		}
+		 
+		$this->mysqli->query("SET NAMES UTF8");
+		$this->mysqli->query("SET CHARACTER SET UTF8");
 	}
 
 	public function __destruct()
@@ -20,21 +29,12 @@ class Database{
 	
     public function query($sql, $params = [])
 	{
-		$stmt = $this->mysqli->prepare($sql);
-		if (!empty($params))
-		{
-			foreach ($params as $key => $val)
-			{
-				$stmt->bindValue(':'.$key, $val);
-			}
-		}
-		$stmt->execute();
-		return $stmt;
+		return $this->mysqli->query($sql);
 	}
 
 	public function row($sql, $params = [])
 	{
 		$result = $this->query($sql, $params);
-		return $result->fetchAll(PDO::FETCH_ASSOC);
+		return $result->fetch_all(MYSQLI_ASSOC);
 	}
 }
