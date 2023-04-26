@@ -17,7 +17,7 @@ class Router
         $controllerPath = 'App\Controllers\\'.$this->controllerName.'Controller';
         $action = $this->actionName.'Action';
 
-        $controller = new $controllerPath;
+        $controller = new $controllerPath($this->controllerName);
         $controller->$action();
     }
 }

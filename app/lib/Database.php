@@ -7,15 +7,24 @@ use PDO;
 class Database{
     protected $mysqli;
 	
-	public function __construct() {
+	public function __construct()
+	{
 		$config = require 'application/config/mysql.php';
         $this->mysqli = new mysqli($config["host"], $config["user"], $config["password"], $config["dbname"]);
 	}
 
-    public function query($sql, $params = []) {
+	public function __destruct()
+    {
+        $this->mysqli->close();
+    }
+	
+    public function query($sql, $params = [])
+	{
 		$stmt = $this->mysqli->prepare($sql);
-		if (!empty($params)) {
-			foreach ($params as $key => $val) {
+		if (!empty($params))
+		{
+			foreach ($params as $key => $val)
+			{
 				$stmt->bindValue(':'.$key, $val);
 			}
 		}
@@ -23,7 +32,8 @@ class Database{
 		return $stmt;
 	}
 
-	public function row($sql, $params = []) {
+	public function row($sql, $params = [])
+	{
 		$result = $this->query($sql, $params);
 		return $result->fetchAll(PDO::FETCH_ASSOC);
 	}

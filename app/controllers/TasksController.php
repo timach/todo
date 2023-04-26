@@ -2,19 +2,23 @@
 
 namespace App\Controllers;
 
-class TasksController
+use App\Core\Controller;
+
+class TasksController extends Controller
 {
-    public function createAction(){
+    public function createAction()
+    {
 
     }
 
-    public function editAction(){
+    public function editAction()
+    {
         
     }
 
-    public function indexAction(){
-        $body = 'task controler - index action';
+    public function indexAction()
+    {
         $title = 'index';
-        require_once(dirname(__FILE__).'/../views/templates/default.php');
+        $this->view->render($title);
     }
 }
