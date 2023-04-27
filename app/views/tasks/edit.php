@@ -1,5 +1,5 @@
 <h1>Редактировать задачу <?=$task->id?></h1>
-<? l($task); ?>
+
 <form class="row g-3" method="POST">
     <input type="hidden" name="token" value="<?=$csrf?>">
     <input type="hidden" name="action" value="edit">
