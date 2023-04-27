@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `todo` (
     `email` VARCHAR(255) NOT NULL ,
     `task_text` VARCHAR(1000) NOT NULL ,
     `status` TINYINT NOT NULL ,
+    `edited` TINYINT NOT NULL,
     PRIMARY KEY (`id`), 
     INDEX (`status`), 
     INDEX (`email`), 
