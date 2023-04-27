@@ -5,7 +5,9 @@
 Шаблон MVC.
 Верстка на bootstrap.
 База данных - mysql (таблица database.sql)
-Для настройки БД создать /config/mysql.php с кодом
+Для настройки БД создать /config/mysql.php с кодом:
+
+```
 <?php
 
 return [
@@ -15,6 +17,7 @@ return [
     "dbname" => "",
     "dsn" => "mysql:host=;dbname=;charset=utf8mb4"
 ];
+```
 
 Задачи состоят из: 
 - идентификатор;
