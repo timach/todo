@@ -8,7 +8,9 @@
             "email": "79050077888@ya.ru"
         }
     ],
-    "require": {},
+    "require": {
+        "simple-crud/simple-crud": "^7.5"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "app"
