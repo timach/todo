@@ -1,4 +1,4 @@
 /vendor/
 composer.phar
 composer.lock
-config/mysql.php
+app/config/mysql.php
