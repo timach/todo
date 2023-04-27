@@ -32,10 +32,18 @@ class TasksController extends Controller
                 $model = $this->loadModel("Tasks");
 
                 $result = $model->putTask($userName, $email, $taskText);
-                l($result);
-                die('ok');
+
+                if($result)
+                {
+                    $_SESSION['message'] = 'Задача добавлена!';
+                }
+                else
+                {
+                    $_SESSION['message'] = 'Ошибка! Задача не добавлена!';   
+                }
+                header("Location: /");
+                exit();
             }
-            //
         }
         else
         {

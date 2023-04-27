@@ -5,9 +5,11 @@ namespace App\Core;
 class View
 {
     public $path;
+	private $message;
 
-	public function __construct($name, $action='index')
+	public function __construct($name, $action='index', $message='')
     {
+		$this->message = $message;
 		$this->path = $name.'/'.$action;
 	}
 
@@ -19,6 +21,7 @@ class View
 
 	public function render($title, $data = [])
     {
+		$message = $this->message;
 		extract($data);
 		$path = '../app/views/'.strtolower($this->path).'.php';
         

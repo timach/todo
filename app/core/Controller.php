@@ -11,7 +11,10 @@ abstract class Controller
 
 	public function __construct($name, $action)
     {
-		$this->view = new View($name, $action);
+		$message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
+		$_SESSION['message'] = '';
+
+		$this->view = new View($name, $action, $message);
 		$this->model = $this->loadModel($name);
 	}
 

@@ -36,6 +36,13 @@
             </nav>
         </head>
         
-        <div class="container"><?=$body?></div>
+        <div class="container mt-5">
+            <?php if($message){ ?>
+            <div class="alert alert-primary" role="alert">
+                <?=$message?>
+            </div>
+            <?php } ?>
+            <?=$body?>
+        </div>
     </body>
 </html>
