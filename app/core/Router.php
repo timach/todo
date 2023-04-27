@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Core;
 
@@ -14,7 +14,7 @@ class Router
     }
     public function run()
     {
-        $controllerPath = 'App\Controllers\\'.$this->controllerName.'Controller';
+        $controllerPath = 'App\Controllers\\'.ucfirst($this->controllerName).'Controller';
         $action = $this->actionName.'Action';
 
         $controller = new $controllerPath($this->controllerName, $this->actionName);
