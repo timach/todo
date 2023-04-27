@@ -8,6 +8,7 @@ abstract class Controller
 {
 	public $view;
     public $model;
+	public $isAdmin;
 
 	public function __construct($name, $action)
     {
@@ -16,6 +17,10 @@ abstract class Controller
 
 		$this->view = new View($name, $action, $message);
 		$this->model = $this->loadModel($name);
+
+		$account = $this->loadModel("Account");
+		$session = isset($_SESSION['isAdmin']) ? $_SESSION['isAdmin'] : false;
+		$this->isAdmin = $account->isAdmin($session);
 	}
 
 	public function loadModel($name)
