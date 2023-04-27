@@ -15,7 +15,7 @@
         <head>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Простой Todo-list</a>
+                <a class="navbar-brand" href="?">Простой Todo-list</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -25,10 +25,10 @@
                             <a class="nav-link active" aria-current="page" href="/">Список задач</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/?controller=tasks&action=create">Создать задачу</a>
+                            <a class="nav-link" href="?controller=tasks&action=create">Создать задачу</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/?controller=account">Профиль</a>
+                            <a class="nav-link" href="?controller=account">Профиль</a>
                         </li>
                     </ul>
                 </div>

@@ -27,12 +27,12 @@ class AccountController extends Controller
             {
                 $_SESSION['message'] = 'Вы вошли как администратор';
                 $_SESSION['isAdmin'] = true;
-                header("Location: /");
+                header("Location: ?");
             }
             else
             {
                 $_SESSION['message'] = 'Неправильный логин или пароль';
-                header("Location: /?controller=account");
+                header("Location: ?controller=account");
             }
             exit();
         }
@@ -54,6 +54,6 @@ class AccountController extends Controller
     public function logoutAction()
     {
         unset($_SESSION['isAdmin']);
-        header("Location: /?controller=account");
+        header("Location: ?controller=account");
     }
 }

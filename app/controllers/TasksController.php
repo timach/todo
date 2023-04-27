@@ -41,7 +41,7 @@ class TasksController extends Controller
                 {
                     $_SESSION['message'] = 'Ошибка! Задача не добавлена!';   
                 }
-                header("Location: /");
+                header("Location: ?");
                 exit();
             }
         }
@@ -58,7 +58,56 @@ class TasksController extends Controller
 
     public function editAction()
     {
+        if(!$this->isAdmin)
+        {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized');
+            exit;
+        }
+
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
+        $model = $this->loadModel("Tasks");
+        $task = $model->getTask($id);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            $token = isset($_POST['token']) ? htmlspecialchars($_POST['token']) : false;
+
+            if (!$token || $token !== $_SESSION['token'])
+            {
+                header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                exit;
+            }
+            else
+            {
+                $userName = isset($_POST['user_name']) ? htmlspecialchars($_POST['user_name']) : '';
+                $email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) : '';
+                $taskText = isset($_POST['task_test']) ? htmlspecialchars($_POST['task_test']) : '';
+                    
+                if(!$userName || !$email || !$taskText)
+                {
+                    header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+                    exit;
+                }
+
+                $model->patchTask($id, $userName, $email, $taskText);
+                
+                $_SESSION['message'] = "Задача $id отредактирована";   
+                header("Location: ?controller=tasks&action=edit&id=$id");
+            }
+        }
+        else
+        {
+            $title = "Редактировать задачу $id";
+
+            //csrf
+            $_SESSION['token'] = $cfrf = md5(uniqid(mt_rand(), true));
+
+            $this->view->render($title, [
+                'task'=>$task,
+                'csrf'=>$cfrf
+            ]);
+        }
+        
     }
 
     private function getPage(){
@@ -110,7 +159,24 @@ class TasksController extends Controller
             "count" => $model->getTasksCount(),
             "order" => $order,
             "order_type" => $order_type,
-            "tasks" => $model->getTasks($page, 3, $order, $order_type)
+            "tasks" => $model->getTasks($page, 3, $order, $order_type),
+            "isAdmin" => $this->isAdmin
         ]);
+    }
+
+    public function successAction()
+    {
+        if(!$this->isAdmin)
+        {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized');
+            exit;
+        }
+
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+        $model = $this->loadModel("Tasks");
+        $model->setStatus($id);
+
+        $_SESSION['message'] = "Задача $id отмечена выполненной";   
+        header("Location: ?");
     }
 }

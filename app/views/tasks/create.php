@@ -7,17 +7,17 @@
 
     <div class="col-md-6">
         <label for="validationDefault01" class="form-label">Имя пользователя</label>
-        <input type="text" name="user_name" class="form-control" id="validationDefault01" value="Mark" required>
+        <input type="text" name="user_name" class="form-control" id="validationDefault01" value="" required>
     </div>
 
     <div class="col-md-6">
         <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="test@test.ru" aria-describedby="emailHelp" required>
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="" aria-describedby="emailHelp" required>
     </div>
 
     <div class="col-md-6">
         <label for="exampleInputText1" class="form-label">Описание задачи</label>
-        <textarea class="form-control" name="task_test" aria-label="With textarea" id="" required>New task!</textarea>
+        <textarea class="form-control" name="task_test" aria-label="With textarea" id="" required></textarea>
     </div>
     
     <div class="col-12">
