@@ -50,9 +50,9 @@ class TasksController extends Controller
             $title = 'Создать задачу';
         
             //csrf
-            $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+            $_SESSION['token'] = $csrf = md5(uniqid(mt_rand(), true));
 
-            $this->view->render($title, []);
+            $this->view->render($title, ['csrf'=>$csrf]);
         }
     }
 
@@ -60,7 +60,8 @@ class TasksController extends Controller
     {
         if(!$this->isAdmin)
         {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized');
+            $_SESSION['message'] = "Действие требует авторизации"; 
+            header("Location: ?controller=account"); 
             exit;
         }
 
@@ -168,7 +169,8 @@ class TasksController extends Controller
     {
         if(!$this->isAdmin)
         {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized');
+            $_SESSION['message'] = "Действие требует авторизации"; 
+            header("Location: ?controller=account"); 
             exit;
         }
 

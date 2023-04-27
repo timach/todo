@@ -1,7 +1,7 @@
 <h1>Создать задачу</h1>
 
 <form class="row g-3" method="POST">
-    <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
+    <input type="hidden" name="token" value="<?=$csrf?>">
     <input type="hidden" name="action" value="create">
     <input type="hidden" name="controller" value="tasks">
 

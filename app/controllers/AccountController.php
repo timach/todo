@@ -45,8 +45,13 @@ class AccountController extends Controller
         }
         else
         {
+            //csrf
+            $_SESSION['token'] = $csrf = md5(uniqid(mt_rand(), true));
             $title = 'Вход';
-            $this->view->render($title, ["isAdmin" => false]);
+            $this->view->render($title, [
+                "isAdmin" => false,
+                "csrf" => $csrf
+            ]);
         }
         
     }

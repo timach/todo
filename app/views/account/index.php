@@ -1,7 +1,7 @@
 <div class="col-md-offset-3 col-md-6">
     <?php if(!$isAdmin){?>
     <form method="POST">
-        <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
+        <input type="hidden" name="token" value="<?=$csrf?>">
         <div class="mb-3">
             <label for="validationTooltipUsername" class="form-label">Логин</label>
             <div class="input-group has-validation">
