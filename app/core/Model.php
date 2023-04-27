@@ -2,15 +2,19 @@
 
 namespace App\Core;
 
-use App\Lib\Database;
+use PDO;
+use SimpleCrud\Database;
 
 abstract class Model
 {
 	public $database;
+	public $db;
 	
 	public function __construct()
 	{
-		$this->database = new Database;
+		$config = require '../app/config/mysql.php';
+		$pdo = new PDO($config['dsn'], $config['user'], $config['password']);
+        $this->db = new Database($pdo);
 	}
 
 }

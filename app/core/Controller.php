@@ -9,9 +9,9 @@ abstract class Controller
 	public $view;
     public $model;
 
-	public function __construct($name)
+	public function __construct($name, $action)
     {
-		$this->view = new View($name);
+		$this->view = new View($name, $action);
 		$this->model = $this->loadModel($name);
 	}
 

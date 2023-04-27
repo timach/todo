@@ -8,12 +8,49 @@ class TasksController extends Controller
 {
     public function createAction()
     {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            $token = isset($_POST['token']) ? htmlspecialchars($_POST['token']) : false;
 
+            if (!$token || $token !== $_SESSION['token'])
+            {
+                header($_SERVER['SERVER_PROTOCOL'] . ' 405 Method Not Allowed');
+                exit;
+            }
+            else
+            {
+                $userName = isset($_POST['user_name']) ? htmlspecialchars($_POST['user_name']) : '';
+                $email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) : '';
+                $taskText = isset($_POST['task_test']) ? htmlspecialchars($_POST['task_test']) : '';
+                
+                if(!$userName || !$email || !$taskText)
+                {
+                    header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');
+                    exit;
+                }
+
+                $model = $this->loadModel("Tasks");
+
+                $result = $model->putTask($userName, $email, $taskText);
+                l($result);
+                die('ok');
+            }
+            //
+        }
+        else
+        {
+            $title = 'Создать задачу';
+        
+            //csrf
+            $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+
+            $this->view->render($title, []);
+        }
     }
 
     public function editAction()
     {
-        
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
     }
 
     private function getPage(){

@@ -32,11 +32,11 @@
   <tbody>
     <?php foreach($tasks as $task){ ?>
     <tr>
-      <th scope="row"><?=$task["id"]?></th>
-      <td><?=$task["user_name"]?></td>
-      <td><?=$task["email"]?></td>
-      <td class="text-justify"><?=$task["task_text"]?></td>
-      <td><?php if(!$task["status"]){ echo "&#10003;"; } ?></td>
+      <th scope="row"><?=$task->id?></th>
+      <td><?=$task->user_name?></td>
+      <td><?=$task->email?></td>
+      <td class="text-justify"><?=$task->task_text?></td>
+      <td><?php if(!$task->status){ echo "&#10003;"; } ?></td>
     </tr>
     <?php } ?>
   </tbody>
